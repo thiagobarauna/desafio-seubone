@@ -1,0 +1,57 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.instructions {
+  margin-top: 2rem;
+  text-align: left;
+  background-color: #1a1a1a;
+  padding: 2rem;
+  border-radius: 8px;
+  border: 1px solid #333;
+}
+
+.instructions h2 {
+  margin-top: 0;
+  color: #646cff;
+}
+
+.instructions ul {
+  padding-left: 1.5rem;
+  color: #ccc;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  .instructions {
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+  }
+  .instructions ul {
+    color: #555;
+  }
+}
