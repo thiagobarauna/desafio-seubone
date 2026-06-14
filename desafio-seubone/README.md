@@ -35,12 +35,13 @@ Tambem usei uma adaptacao leve de OKR/SMART: cada atividade tem um objetivo cone
 
 ## Funcionalidades
 
-- Dados de exemplo com time ficticio, clientes, objetivos, prazos e prioridades.
+- Dados de exemplo com uma equipe ficticia de TI, clientes internos, objetivos, prazos e prioridades.
 - Criacao de novas atividades pelo formulario.
 - Filtros por responsavel e prioridade.
 - Movimento das atividades entre colunas.
 - Marcacao e liberacao de bloqueios.
 - Indicadores calculados automaticamente a partir do quadro.
+- Area visual de ponto dos funcionarios, com entrada, saida, jornada e status do colaborador.
 - Interface inspirada em Trello, com identidade visual preta e amarela.
 
 ## Decisoes de escopo

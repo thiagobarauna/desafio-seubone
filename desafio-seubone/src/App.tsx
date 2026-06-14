@@ -4,11 +4,16 @@ import './App.css';
 
 type Status = 'backlog' | 'doing' | 'review' | 'done';
 type Priority = 'Alta' | 'Media' | 'Baixa';
+type AttendanceStatus = 'No ponto' | 'Em pausa' | 'Atrasado' | 'Encerrado';
 
 type TeamMember = {
   id: string;
   name: string;
   role: string;
+  shift: string;
+  checkIn: string;
+  checkOut?: string;
+  attendanceStatus: AttendanceStatus;
 };
 
 type Activity = {
@@ -25,11 +30,16 @@ type Activity = {
 };
 
 const team: TeamMember[] = [
-  { id: 'ana', name: 'Ana', role: 'Operacoes' },
-  { id: 'bruno', name: 'Bruno', role: 'Comercial' },
-  { id: 'carla', name: 'Carla', role: 'Sucesso' },
-  { id: 'diego', name: 'Diego', role: 'Financeiro' },
-  { id: 'elisa', name: 'Elisa', role: 'Produto' },
+  { id: 'marina', name: 'Marina Lopes', role: 'Tech Lead', shift: '08:00 - 17:00', checkIn: '07:56', attendanceStatus: 'No ponto' },
+  { id: 'rafael', name: 'Rafael Nunes', role: 'Back-end', shift: '09:00 - 18:00', checkIn: '09:08', attendanceStatus: 'Atrasado' },
+  { id: 'bianca', name: 'Bianca Reis', role: 'Front-end', shift: '08:00 - 17:00', checkIn: '08:01', attendanceStatus: 'No ponto' },
+  { id: 'lucas', name: 'Lucas Martins', role: 'DevOps', shift: '07:00 - 16:00', checkIn: '06:58', attendanceStatus: 'No ponto' },
+  { id: 'camila', name: 'Camila Torres', role: 'QA', shift: '08:00 - 17:00', checkIn: '08:00', attendanceStatus: 'Em pausa' },
+  { id: 'henrique', name: 'Henrique Alves', role: 'Product Owner', shift: '09:00 - 18:00', checkIn: '08:52', attendanceStatus: 'No ponto' },
+  { id: 'isabela', name: 'Isabela Rocha', role: 'UX/UI Designer', shift: '08:00 - 17:00', checkIn: '08:04', attendanceStatus: 'No ponto' },
+  { id: 'matheus', name: 'Matheus Costa', role: 'Suporte N2', shift: '10:00 - 19:00', checkIn: '10:00', attendanceStatus: 'No ponto' },
+  { id: 'priscila', name: 'Priscila Lima', role: 'Data Analyst', shift: '08:00 - 17:00', checkIn: '07:59', checkOut: '16:58', attendanceStatus: 'Encerrado' },
+  { id: 'thiago', name: 'Thiago Barros', role: 'Analista de Seguranca', shift: '09:00 - 18:00', checkIn: '09:03', attendanceStatus: 'No ponto' },
 ];
 
 const columns: { id: Status; title: string; helper: string }[] = [
@@ -42,87 +52,123 @@ const columns: { id: Status; title: string; helper: string }[] = [
 const initialActivities: Activity[] = [
   {
     id: 1,
-    title: 'Implantar checklist de abertura da loja',
-    customer: 'Mercado Boa Vista',
-    ownerId: 'ana',
+    title: 'Criar API de autenticacao com refresh token',
+    customer: 'Portal do Cliente',
+    ownerId: 'rafael',
     dueDate: '2026-06-14',
     status: 'doing',
     priority: 'Alta',
-    objective: 'Reduzir retrabalho operacional',
+    objective: 'Aumentar seguranca no acesso',
     estimate: 6,
     blocked: false,
   },
   {
     id: 2,
-    title: 'Revisar proposta do contrato anual',
-    customer: 'Climafrio',
-    ownerId: 'bruno',
+    title: 'Validar deploy azul-verde em homologacao',
+    customer: 'Infraestrutura',
+    ownerId: 'lucas',
     dueDate: '2026-06-15',
     status: 'review',
     priority: 'Alta',
-    objective: 'Aumentar receita recorrente',
+    objective: 'Reduzir indisponibilidade em releases',
     estimate: 4,
     blocked: true,
   },
   {
     id: 3,
-    title: 'Treinar equipe no novo fluxo de atendimento',
-    customer: 'Rede Mais Saude',
-    ownerId: 'carla',
+    title: 'Refatorar tela de chamados do service desk',
+    customer: 'Atendimento interno',
+    ownerId: 'bianca',
     dueDate: '2026-06-18',
     status: 'backlog',
     priority: 'Media',
-    objective: 'Melhorar tempo de resposta',
+    objective: 'Diminuir tempo de triagem',
     estimate: 8,
     blocked: false,
   },
   {
     id: 4,
-    title: 'Fechar conciliacao de recebiveis',
-    customer: 'Interno',
-    ownerId: 'diego',
+    title: 'Corrigir falha no relatorio de SLA',
+    customer: 'Operacoes de TI',
+    ownerId: 'priscila',
     dueDate: '2026-06-13',
     status: 'doing',
     priority: 'Alta',
-    objective: 'Evitar atraso financeiro',
+    objective: 'Dar confiabilidade aos indicadores',
     estimate: 5,
     blocked: false,
   },
   {
     id: 5,
-    title: 'Publicar painel semanal de indicadores',
-    customer: 'Diretoria',
-    ownerId: 'elisa',
+    title: 'Publicar dashboard semanal de incidentes',
+    customer: 'Diretoria de TI',
+    ownerId: 'henrique',
     dueDate: '2026-06-14',
     status: 'done',
     priority: 'Media',
-    objective: 'Dar visibilidade para decisoes',
+    objective: 'Dar visibilidade para decisoes tecnicas',
     estimate: 3,
     blocked: false,
   },
   {
     id: 6,
-    title: 'Mapear gargalos do pos-venda',
-    customer: 'Interno',
-    ownerId: 'carla',
+    title: 'Escrever testes automatizados do checkout',
+    customer: 'E-commerce B2B',
+    ownerId: 'camila',
     dueDate: '2026-06-20',
     status: 'backlog',
     priority: 'Baixa',
-    objective: 'Reduzir chamados reabertos',
+    objective: 'Reduzir regressao em producao',
     estimate: 7,
     blocked: false,
   },
   {
     id: 7,
-    title: 'Validar escopo da integracao fiscal',
-    customer: 'Construtora Lima',
-    ownerId: 'elisa',
+    title: 'Revisar prototipo do app mobile interno',
+    customer: 'RH Tech',
+    ownerId: 'isabela',
     dueDate: '2026-06-17',
     status: 'doing',
     priority: 'Media',
-    objective: 'Diminuir lancamentos manuais',
+    objective: 'Melhorar adesao dos colaboradores',
     estimate: 6,
     blocked: true,
+  },
+  {
+    id: 8,
+    title: 'Auditar permissoes de acesso ao banco',
+    customer: 'Seguranca da Informacao',
+    ownerId: 'thiago',
+    dueDate: '2026-06-19',
+    status: 'backlog',
+    priority: 'Alta',
+    objective: 'Reduzir risco de acesso indevido',
+    estimate: 5,
+    blocked: false,
+  },
+  {
+    id: 9,
+    title: 'Organizar fila de chamados criticos',
+    customer: 'Service Desk',
+    ownerId: 'matheus',
+    dueDate: '2026-06-16',
+    status: 'doing',
+    priority: 'Alta',
+    objective: 'Atacar incidentes com maior impacto',
+    estimate: 4,
+    blocked: false,
+  },
+  {
+    id: 10,
+    title: 'Planejar sprint tecnica da squad',
+    customer: 'Squad Plataforma',
+    ownerId: 'marina',
+    dueDate: '2026-06-15',
+    status: 'review',
+    priority: 'Media',
+    objective: 'Alinhar capacidade e prioridades',
+    estimate: 3,
+    blocked: false,
   },
 ];
 
@@ -142,6 +188,10 @@ function getOwner(ownerId: string) {
 function daysUntilDue(date: string) {
   const dueDate = new Date(`${date}T12:00:00`);
   return Math.ceil((dueDate.getTime() - today.getTime()) / 86_400_000);
+}
+
+function getAttendanceClass(status: AttendanceStatus) {
+  return status.toLowerCase().replaceAll(' ', '-');
 }
 
 function App() {
@@ -170,13 +220,15 @@ function App() {
     const completed = activities.filter((activity) => activity.status === 'done').length;
     const blocked = activeActivities.filter((activity) => activity.blocked).length;
     const deliveryRate = Math.round((completed / activities.length) * 100);
+    const onClock = team.filter((member) => member.attendanceStatus === 'No ponto').length;
+    const latePunches = team.filter((member) => member.attendanceStatus === 'Atrasado').length;
     const workload = team.map((member) => ({
       ...member,
       total: activeActivities.filter((activity) => activity.ownerId === member.id).length,
     }));
     const busiest = workload.reduce((current, member) => (member.total > current.total ? member : current), workload[0]);
 
-    return { overdue, dueSoon, wip, blocked, deliveryRate, busiest, workload };
+    return { overdue, dueSoon, wip, blocked, deliveryRate, busiest, workload, onClock, latePunches };
   }, [activities]);
 
   function moveActivity(activityId: number, direction: -1 | 1) {
@@ -225,15 +277,15 @@ function App() {
           <span className="eyebrow">Quatro5 Board</span>
           <h1>Gestao de atividades do time</h1>
           <p>
-            Kanban com foco em prazos, carga do time e bloqueios para o Ricardo decidir antes que o
-            problema vire atraso.
+            Kanban para uma empresa de TI, com prazos, carga do time, bloqueios e ponto dos
+            colaboradores em uma unica visao operacional.
           </p>
         </div>
 
         <div className="sprint-card">
           <span>Sprint atual</span>
           <strong>10 a 21 jun</strong>
-          <small>{activities.length} atividades monitoradas</small>
+          <small>{activities.length} atividades e {team.length} pessoas monitoradas</small>
         </div>
       </header>
 
@@ -257,6 +309,11 @@ function App() {
           <span>Bloqueios ativos</span>
           <strong>{metrics.blocked}</strong>
           <small>Maior carga: {metrics.busiest.name}</small>
+        </article>
+        <article className="metric-card">
+          <span>No ponto agora</span>
+          <strong>{metrics.onClock}/{team.length}</strong>
+          <small>{metrics.latePunches} registro com atraso</small>
         </article>
       </section>
 
@@ -288,7 +345,7 @@ function App() {
         <form className="activity-form" onSubmit={handleCreateActivity}>
           <input name="title" placeholder="Nova atividade" required />
           <input name="customer" placeholder="Cliente ou area" required />
-          <select name="ownerId" defaultValue="ana" aria-label="Responsavel">
+          <select name="ownerId" defaultValue="marina" aria-label="Responsavel">
             {team.map((member) => (
               <option key={member.id} value={member.id}>
                 {member.name}
@@ -305,6 +362,45 @@ function App() {
           <input name="objective" placeholder="Objetivo conectado" required />
           <button type="submit">Adicionar</button>
         </form>
+      </section>
+
+      <section className="time-clock-panel" aria-label="Ponto dos funcionarios">
+        <header>
+          <div>
+            <span className="panel-kicker">Ponto dos funcionarios</span>
+            <h2>Controle de jornada da equipe de TI</h2>
+          </div>
+          <button type="button">Marcar ponto</button>
+        </header>
+
+        <div className="time-clock-grid">
+          {team.map((member) => (
+            <article className="time-clock-card" key={member.id}>
+              <div className="avatar">{member.name.slice(0, 2)}</div>
+              <div>
+                <strong>{member.name}</strong>
+                <span>{member.role}</span>
+              </div>
+              <div className={`attendance-badge attendance-${getAttendanceClass(member.attendanceStatus)}`}>
+                {member.attendanceStatus}
+              </div>
+              <dl>
+                <div>
+                  <dt>Entrada</dt>
+                  <dd>{member.checkIn}</dd>
+                </div>
+                <div>
+                  <dt>Saida</dt>
+                  <dd>{member.checkOut ?? '--:--'}</dd>
+                </div>
+                <div>
+                  <dt>Jornada</dt>
+                  <dd>{member.shift}</dd>
+                </div>
+              </dl>
+            </article>
+          ))}
+        </div>
       </section>
 
       <section className="workload-panel" aria-label="Carga por pessoa">
@@ -378,7 +474,7 @@ function App() {
                             disabled={activity.status === 'backlog'}
                             aria-label="Mover para coluna anterior"
                           >
-                            ‹
+                            &lt;
                           </button>
                           <button type="button" onClick={() => toggleBlocked(activity.id)}>
                             {activity.blocked ? 'Liberar' : 'Bloquear'}
@@ -389,7 +485,7 @@ function App() {
                             disabled={activity.status === 'done'}
                             aria-label="Mover para proxima coluna"
                           >
-                            ›
+                            &gt;
                           </button>
                         </div>
                       </footer>
