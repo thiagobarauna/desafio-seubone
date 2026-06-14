@@ -4,19 +4,37 @@ Ferramenta de gestao de atividades para um time pequeno, criada para o desafio t
 
 ## Como rodar
 
-1. Instale as dependencias:
+1. Clone o repositorio:
+
+```bash
+git clone https://github.com/thiagobarauna/desafio-seubone.git
+```
+
+2. Entre na pasta do projeto:
+
+```bash
+cd desafio-seubone
+```
+
+3. Entre na pasta da aplicacao:
+
+```bash
+cd desafio-seubone
+```
+
+4. Instale as dependencias:
 
 ```bash
 npm install
 ```
 
-2. Rode o projeto:
+5. Rode o projeto:
 
 ```bash
 npm run dev
 ```
 
-3. Abra o endereco exibido no terminal, normalmente `http://localhost:5173`.
+6. Abra o endereco exibido no terminal, normalmente `http://localhost:5173`.
 
 ## Caminho escolhido
 
